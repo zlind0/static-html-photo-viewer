@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<style>
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    body{
+        background-color: #000000;
+        margin: 0;
+    }
+    #switch-left{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 30%;
+        height: 100%;
+        background-color: transparent;
+        z-index: 9999;
+    }
+    #switch-right{
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 30%;
+        height: 100%;
+        background-color: transparent;
+        z-index: 9999;
+    }
+</style>
+
+<body>
+    <img id="view1">
+    <div id="switch-left"></div>
+    <div id="switch-right"></div>
+</body>
+
+<script type="text/javascript" src="imgs.js"></script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    var imageid = urlParams.get('imageid');
+    console.log(imageid);
+
+    function showImage(imageid){
+        const image = imageData[imageid];
+        console.log(image);
+        document.getElementById("view1").src = image;
+    }
+    showImage(imageid);
+
+    var left = document.getElementById("switch-left");
+    var right = document.getElementById("switch-right");
+
+    left.onclick = function(){
+        if(imageid == 0){
+            imageid = imageData.length - 1;
+        }
+        else{
+            imageid--;
+        }
+        showImage(imageid);
+    }
+
+    right.onclick = function(){
+        if(imageid == imageData.length - 1){
+            imageid = 0;
+        }
+        else{
+            imageid++;
+        }
+        showImage(imageid);
+    }
+    
+
+</script>
